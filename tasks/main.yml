@@ -1,0 +1,8 @@
+---
+- name: Add limits configuration
+  ansible.builtin.include_tasks: install.yml
+  when: limits_uninstall == false
+
+- name: Remove limits configuration
+  ansible.builtin.include_tasks: uninstall.yml
+  when: limits_uninstall == true
