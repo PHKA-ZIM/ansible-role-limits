@@ -1,5 +1,3 @@
 ---
-limits_limitsd_path: "/etc/security/limits.d/"
-limits_file_owner: root
-limits_file_group: root
-limits_file_mode: "644"
+limits_limitsd_path: /etc/security/limits.d/
+limits_file_mode: 0644
