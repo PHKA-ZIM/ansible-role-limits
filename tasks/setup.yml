@@ -1,0 +1,20 @@
+---
+- name: Copy limits.d files
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ limits_limitsd_path }}"
+    mode: "{{ limits_file_mode }}"
+    force: true
+  with_fileglob:
+    - "{{ limits_local_limitsd_path }}/*.conf"
+
+- name: Copy limits.d templates
+  become: true
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ limits_limitsd_path }}/{{  item | basename | splitext | first }}"
+    mode: "{{ limits_file_mode }}"
+    force: true
+  with_fileglob:
+    - "{{ limits_local_limitsd_path }}/*.conf.j2"

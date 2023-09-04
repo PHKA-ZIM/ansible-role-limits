@@ -1,0 +1,16 @@
+---
+- name: Remove limits.d configuration based on files
+  become: true
+  ansible.builtin.file:
+    path: "{{ limits_limitsd_path }}/{{ item | basename }}"
+    state: absent
+  with_fileglob:
+    - "{{ limits_local_limitsd_path }}/*.conf"
+
+- name: Remove limits.d configuration based on templates
+  become: true
+  ansible.builtin.file:
+    path: "{{ limits_limitsd_path }}/{{ item | basename | splitext | first }}"
+    state: absent
+  with_fileglob:
+    - "{{ limits_local_limitsd_path }}/*.conf.j2"

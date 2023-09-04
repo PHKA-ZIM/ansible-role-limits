@@ -1,8 +1,0 @@
----
-- name: Remove limits.d files
-  become: true
-  ansible.builtin.file:
-    path: "{{ limits_limitsd_path }}/{{ item | basename }}"
-    state: absent
-  with_fileglob:
-    - "{{ limits_local_limitsd_path }}/*.conf"
